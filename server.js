@@ -3,9 +3,10 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var standardWebpackConf = require('./webpack.conf.js');
 var webpackConf = Object.assign({}, standardWebpackConf);
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
-// add componentHotLoader and serviceLoader
+// // add componentHotLoader and serviceLoader
 // (webpackConf.module.preLoaders = webpackConf.module.preLoaders || []).push(
 //   { test: /\.component\.js$/, loader: componentHotLoader, exclude: [/client\/lib/, /node_modules/, /\.spec\.js/] }
 // );
@@ -20,22 +21,27 @@ webpackConf.devtool = 'eval';
 webpackConf.entry = [
   'webpack-dev-server/client?http://localhost:8080',
   'webpack/hot/dev-server',
-  './index.desktop.js'
+  './entry.js'
 ];
 // for css source maps support
-webpackConf.output.publicPath = 'http://localhost:8080/static/';
+webpackConf.output.publicPath = 'http://localhost:8080/';
 webpackConf.module.loaders.forEach(function(value) {
   value.loader = value.loader.replace('css-loader', 'css-loader?sourceMap');
 });
 
 webpackConf.plugins = [
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new HtmlWebpackPlugin({
+    template:'index.html'
+  })
 ];
 
 
 new WebpackDevServer(webpack(webpackConf), {
   publicPath: webpackConf.output.publicPath,
-  hot: true
+  hot: true,
+  historyApiFallback:true,
+  contentBase:'static/'
 }).listen(8080, 'localhost', function (err, result) {
   if (err) {
     console.log(err);
