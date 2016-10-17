@@ -24,7 +24,7 @@ gulp.task('webpack:dist', done => {
 });
 
 
-gulp.task('webpack:dev:server', () => {
+gulp.task('webpack:dev-server', () => {
   console.log(webpackDevConf);
   new WebpackDevServer(
     webpack(webpackDevConf), {

@@ -1,4 +1,4 @@
-const conf = require('./gulp.conf');
+const conf = require('./conf');
 
 module.exports = function () {
   return {

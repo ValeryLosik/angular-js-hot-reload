@@ -1,6 +1,7 @@
 const conf = require('./gulp.conf');
 const standardWebpackConf = require('./webpack.conf.js');
-const webpackConf = Object.assign({}, standardWebpackConf);
+const clone = require('clone');
+const webpackConf = clone(standardWebpackConf);
 const webpack = require('webpack');
 const componentHotLoader = require.resolve('./../loaders/component-loader');
 const serviceHotLoader = require.resolve('./../loaders/service-loader');
