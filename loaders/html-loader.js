@@ -14,7 +14,7 @@ module.exports = function (input) {
     if (module.hot) {
       module.hot.accept(console.log.bind(console));
       const newTpl = module.exports;
-      const doc = angular.element(document);
+      const doc = angular.element(document.body);
       const injector = doc.injector();
       if(injector) {
         const $compile = injector.get('$compile');
@@ -32,7 +32,7 @@ module.exports = function (input) {
         }
 
         // trigger rootscope update
-        angular.element(document).find('html').scope().$apply();
+        angular.element(document.querySelectorAll('[ng-app]')[0]).scope().$apply();
         console.info('Hot Swapped template ' + name);
       }
     }

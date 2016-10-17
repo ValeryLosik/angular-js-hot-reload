@@ -27,7 +27,7 @@ module.exports = function (input) {
         nonenumOnly.forEach(val => origin.__proto__[val] = target[val]);
 
         // trigger rootscope update
-        doc.find('html').scope().$apply();
+        angular.element(document.querySelectorAll('[ng-app]')[0]).scope().$apply();
         console.info('Hot Swapped ' + name);
       }
     }

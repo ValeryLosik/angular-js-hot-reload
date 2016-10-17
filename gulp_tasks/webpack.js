@@ -4,6 +4,7 @@ const gutil = require('gulp-util');
 const webpack = require('webpack');
 const webpackConf = require('../conf/webpack.conf');
 const webpackDistConf = require('../conf/webpack-dist.conf');
+const webpackDevConf = require('../conf/webpack-dev.conf');
 const gulpConf = require('../conf/gulp.conf');
 const browsersync = require('browser-sync');
 const WebpackDevServer = require('webpack-dev-server');
@@ -23,19 +24,16 @@ gulp.task('webpack:dist', done => {
 });
 
 
-gulp.task('webt', () => {
+gulp.task('webpack:dev:server', () => {
+  console.log(webpackDevConf);
   new WebpackDevServer(
-    webpack(webpackConf), {
-      hot:true,
-      publicPath: webpackConf.output.publicPath,
-      // inline: true,
-      // hot: true,
-      stats: {
-        colors: true
-      }
-    }).listen(8080, "localhost", function (err) {
+    webpack(webpackDevConf), {
+      publicPath: webpackDevConf.output.publicPath,
+      hot: true,
+      historyApiFallback: true
+    }).listen(gulpConf.port, "localhost", function (err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
-    gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+    gutil.log("[webpack-dev-server]", `http://localhost:${gulpConf.port}/webpack-dev-server/index.html`);
   });
 });
 

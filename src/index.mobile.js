@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import {helloMobile} from './app/hello';
+import {helloMobile} from './app/hello.component';
 import 'angular-ui-router';
 import routesConfig from './routes';
 

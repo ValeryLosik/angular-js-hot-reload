@@ -1,4 +1,4 @@
-const isMobile = 1;
+const isMobile = 0;
 if (isMobile) {
   require.ensure([], require => {
     require('./index.mobile');

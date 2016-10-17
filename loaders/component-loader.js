@@ -32,7 +32,7 @@ module.exports = function (input) {
           nonenumOnly.forEach(val => origin.prototype[val] = target[val]);
 
           // trigger rootscope update
-          angular.element(document).find('html').scope().$apply();
+          angular.element(document.querySelectorAll('[ng-app]')[0]).scope().$apply();
           console.info('Hot Swapped ' + name);
         }
       }

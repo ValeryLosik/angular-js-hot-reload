@@ -8,11 +8,11 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   module: {
     preLoaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-      }
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'eslint'
+      // }
     ],
 
     loaders: [
@@ -24,7 +24,12 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        loader: 'style!css!less!postcss?resolve url'
+        loaders: [
+          'style',
+          'css',
+          'less',
+          'postcss'
+        ]
       },
       {
         test: /\.js$/,
@@ -46,21 +51,15 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: conf.path.src('index.html')
     })
   ],
   postcss: () => [autoprefixer],
   debug: true,
-  context: path.resolve(__dirname + '/../src'),
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, '/../', conf.paths.tmp),
-    filename: 'index.js',
-    publicPath: 'http://localhost:8080/.tmp/'
+    path: path.join(process.cwd(), conf.paths.tmp),
+    filename: 'index.js'
   },
-  entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/dev-server',
-    `./entry.js`
-  ]
+  entry: `./${conf.path.src('entry')}`
 };

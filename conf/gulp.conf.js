@@ -10,19 +10,13 @@
 
 const path = require('path');
 const gutil = require('gulp-util');
-
+const conf = require('./conf.json');
 exports.ngModule = 'app';
 
 /**
  *  The main paths of your project handle these with care
  */
-exports.paths = {
-  src: 'src',
-  dist: 'dist',
-  tmp: '.tmp',
-  e2e: 'e2e',
-  tasks: 'gulp_tasks'
-};
+Object.assign(exports, conf);
 
 exports.path = {};
 for (const pathName in exports.paths) {
