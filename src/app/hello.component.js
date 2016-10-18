@@ -5,7 +5,7 @@ class HelloController {
   }
 
   onClick() {
-    this.counter += 5;
+    this.counter += 1102;
   }
 
 }

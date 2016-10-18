@@ -9,8 +9,8 @@ module.exports = function (input) {
   const fileName = path.basename(this.resourcePath, '.component.js');
   const controllerName = `${capitalize(camelCase(fileName))}Controller`;
   const directiveName = camelCase(fileName);
-
   return input + `
+  /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept();
       // get controller instance
@@ -34,6 +34,7 @@ module.exports = function (input) {
           // trigger rootscope update
           doc.scope().$apply();
           console.info('Hot Swapped ' + name);
+          debugger;
         }
       }
     }

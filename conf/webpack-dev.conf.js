@@ -12,7 +12,7 @@ webpackConf.entry = [
   'webpack/hot/dev-server',
   standardWebpackConf.entry
 ];
-webpackConf.devtool = 'eval';
+ webpackConf.devtool = 'cheap-module-source-map';
 // add componentHotLoader and serviceLoader
 (webpackConf.module.preLoaders = webpackConf.module.preLoaders || []).push(
   { test: /\.component\.js$/, loader: componentHotLoader, exclude: [/client\/lib/, /node_modules/, /\.spec\.js/] }

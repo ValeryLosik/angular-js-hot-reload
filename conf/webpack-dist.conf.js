@@ -26,10 +26,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        loaders: ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!less!postcss'
-        })
+        loader: ExtractTextPlugin.extract(["css?minimize", "less", "postcss"])
       },
       {
         test: /\.js$/,

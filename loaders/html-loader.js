@@ -9,8 +9,8 @@ module.exports = function (input) {
   const fileName = path.basename(this.resourcePath,  '.html');
   const tagName = kebabCase(fileName);
   const directiveName = camelCase(fileName);
-
   return input + `
+    /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept(console.log.bind(console));
       const newTpl = module.exports;

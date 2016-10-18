@@ -6,9 +6,7 @@ import routesConfig from './routes';
 
 import './index.less';
 
-export const app = 'app';
-
 angular
-  .module(app, ['ui.router'])
+  .module('app', ['ui.router'])
   .config(routesConfig)
   .component('hello', HelloComponent);

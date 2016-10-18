@@ -8,8 +8,8 @@ module.exports = function (input) {
   this.cacheable();
   const fileName = path.basename(this.resourcePath, '.service.js');
   const classToInject = capitalize(camelCase(fileName));
-
   return input + `
+  /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept(console.log.bind(console));
       // get service instance
