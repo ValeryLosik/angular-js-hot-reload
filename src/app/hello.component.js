@@ -1,11 +1,11 @@
 class HelloController {
   constructor() {
-    this.hello = 'Hello world!!';
+    this.hello = 'Hello world!';
     this.counter = 0;
   }
 
   onClick() {
-    this.counter -= 5;
+    this.counter += 5;
   }
 
 }

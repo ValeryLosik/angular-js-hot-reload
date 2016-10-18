@@ -14,7 +14,7 @@ module.exports = function (input) {
       module.hot.accept(console.log.bind(console));
       // get service instance
       const name = ${classToInject}.name;
-      const doc = angular.element(document);
+      const doc = angular.element(document.querySelectorAll('[ng-app]')[0]);
       const injector = doc.injector();
       if (injector) {
         const origin = injector.get(name);
@@ -27,7 +27,7 @@ module.exports = function (input) {
         nonenumOnly.forEach(val => origin.__proto__[val] = target[val]);
 
         // trigger rootscope update
-        angular.element(document.querySelectorAll('[ng-app]')[0]).scope().$apply();
+        doc.scope().$apply();
         console.info('Hot Swapped ' + name);
       }
     }

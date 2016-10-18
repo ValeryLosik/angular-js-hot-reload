@@ -16,7 +16,7 @@ module.exports = function (input) {
       // get controller instance
       const name = ${controllerName}.name;
       // don't do anything if the directive is not printed
-      const doc = angular.element(document.body);
+      const doc = angular.element(document.querySelectorAll('[ng-app]')[0]);
       const injector = doc.injector();
       if (injector) {
         const directive = injector.get('${directiveName}Directive')[0];
@@ -32,7 +32,7 @@ module.exports = function (input) {
           nonenumOnly.forEach(val => origin.prototype[val] = target[val]);
 
           // trigger rootscope update
-          angular.element(document.querySelectorAll('[ng-app]')[0]).scope().$apply();
+          doc.scope().$apply();
           console.info('Hot Swapped ' + name);
         }
       }
