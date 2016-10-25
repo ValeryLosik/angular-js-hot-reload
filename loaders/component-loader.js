@@ -10,13 +10,14 @@ module.exports = function (input) {
   const controllerName = `${capitalize(camelCase(fileName))}Controller`;
   const directiveName = camelCase(fileName);
   return input + `
+  /*eslint-disable */
   /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept();
       // get controller instance
       const name = ${controllerName}.name;
       // don't do anything if the directive is not printed
-      const doc = angular.element(document.querySelectorAll('[ng-app]')[0]);
+      const doc = angular.element(document.body);
       const injector = doc.injector();
       if (injector) {
         const directive = injector.get('${directiveName}Directive')[0];
@@ -30,11 +31,9 @@ module.exports = function (input) {
           // so return true so we keep this in the filter if it's not the constructor
           const nonenumOnly = enumAndNonenum.filter(key => enumOnly.indexOf(key) === -1 && key !== 'constructor');
           nonenumOnly.forEach(val => origin.prototype[val] = target[val]);
-
           // trigger rootscope update
           doc.scope().$apply();
-          console.info('Hot Swapped ' + name);
-          debugger;
+          console.info('Hot Swapped ' + name); 
         }
       }
     }

@@ -9,6 +9,7 @@ module.exports = function (input) {
   const fileName = path.basename(this.resourcePath, '.service.js');
   const classToInject = capitalize(camelCase(fileName));
   return input + `
+  /*eslint-disable */
   /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept(console.log.bind(console));
@@ -25,7 +26,6 @@ module.exports = function (input) {
         // so return true so we keep this in the filter if it's not the constructor
         const nonenumOnly = enumAndNonenum.filter(key => enumOnly.indexOf(key) === -1 && key !== 'constructor');
         nonenumOnly.forEach(val => origin.__proto__[val] = target[val]);
-
         // trigger rootscope update
         doc.scope().$apply();
         console.info('Hot Swapped ' + name);

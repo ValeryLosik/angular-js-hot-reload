@@ -10,24 +10,14 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   module: {
     preLoaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-      }
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'eslint'
+      // }
     ],
 
     loaders: [
-      {
-        test: /.json$/,
-        loaders: [
-          'json'
-        ]
-      },
-      {
-        test: /\.(css|less)$/,
-        loader: ExtractTextPlugin.extract(["css?minimize", "less", "postcss"])
-      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -37,10 +27,25 @@ module.exports = {
         ]
       },
       {
+        test: /.json$/,
+        loaders: [
+          'json'
+        ]
+      },
+      {
+        test: /\.(css|less)$/,
+        loader: ExtractTextPlugin.extract('style','css?minimize!less!postcss')
+      },
+      {
         test: /.html$/,
         loaders: [
           'html'
         ]
+      },
+      {
+        test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        exclude: /\/node_modules\//,
+        loader: 'file?[path][name].[ext]'
       }
     ]
   },

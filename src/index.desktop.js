@@ -4,9 +4,11 @@ import HelloComponent from './app/hello.component';
 import 'angular-ui-router';
 import routesConfig from './routes';
 
-import './index.less';
+import './index.desktop.less';
 
-angular
+export default angular
   .module('app', ['ui.router'])
   .config(routesConfig)
-  .component('hello', HelloComponent);
+  .component('hello', HelloComponent)
+  .name;
+

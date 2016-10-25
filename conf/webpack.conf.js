@@ -8,11 +8,11 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   module: {
     preLoaders: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: 'eslint'
-      // }
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint'
+      }
     ],
 
     loaders: [
@@ -61,5 +61,5 @@ module.exports = {
     path: path.join(process.cwd(), conf.paths.tmp),
     filename: 'index.js'
   },
-  entry: `./${conf.path.src('index.desktop')}`
+  entry: `./${conf.path.src('entry')}`
 };

@@ -6,17 +6,18 @@ const camelCase = require('lodash.camelcase');
 
 module.exports = function (input) {
   this.cacheable();
-  const fileName = path.basename(this.resourcePath,  '.html');
+  const fileName = path.basename(this.resourcePath, '.html');
   const tagName = kebabCase(fileName);
   const directiveName = camelCase(fileName);
   return input + `
+    /*eslint-disable */
     /* ANGULAR HOT LOADER */
     if (module.hot) {
       module.hot.accept(console.log.bind(console));
       const newTpl = module.exports;
-      const doc = angular.element(document.querySelectorAll('[ng-app]')[0]);
+      const doc = angular.element(document.body);
       const injector = doc.injector();
-      if(injector) {
+      if (injector) {
         const $compile = injector.get('$compile');
         const oldTemplate = injector.get('${directiveName}Directive')[0];
         if (oldTemplate.template !== newTpl) {
@@ -30,11 +31,12 @@ module.exports = function (input) {
             $compile(angularElement.contents())(scope);
           });
         }
-
         // trigger rootscope update
         doc.scope().$apply();
         console.info('Hot Swapped template ' + name);
       }
     }
+    /*eslint-enable */
+    
   `;
 };

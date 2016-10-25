@@ -1,14 +1,13 @@
 import angular from 'angular';
 
-import {helloMobile} from './app/hello.component';
+import HelloComponent from './app/hello.component';
 import 'angular-ui-router';
 import routesConfig from './routes';
 
-import './index.less';
+import './index.mobile.less';
 
-export const app = 'app';
-
-angular
-  .module(app, ['ui.router'])
+export default angular
+  .module('app', ['ui.router'])
   .config(routesConfig)
-  .component('app', helloMobile);
+  .component('hello', HelloComponent)
+  .name;
